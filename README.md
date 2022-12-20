@@ -7,43 +7,43 @@ It creates one business group and adds three environments to it. You can check [
 
 
 ## How to use this demo ? 
-Before you begin, make sure you install [terraform](https://learn.hashicorp.com/tutorials/terraform/install-cli).
+Before you begin, make sure you install [Terraform](https://learn.hashicorp.com/tutorials/terraform/install-cli).
 
-Copy the demo folder to your workspace and perform the following action: 
+Copy the demo folder to your workspace and perform the following actions: 
 
-1. Fill the `params.tfvars.json` file with your own parameters. You will find more information about each parameter in the `Terraform parameters file` section
+1. Fill the [params.tfvars.json](params.tfvars.json) file with your own parameters. You will find more information about each parameter in the [Terraform parameters file](#terraform-parameters-file) section
 2. Please use the following commands on your terminal:
-    * If it's the first time use execute this specific instance of the template, use the following command to initialize terraform providers: 
+    * If it's the first time you execute this specific instance of the demo, use the following command to initialize Anypoint Terraform provider: 
       ```shell
       $ terraform init  
       ```
-    * To apply the changes and create the resources in the platform, use the following commands: 
+    * To apply the changes and create the resources in Anypoint Platform, use the following command: 
       ```shell
       $ terraform apply -var-file="params.tfvars.json"
       ```
       Terraform will show you all the actions it will perform and ask for your validation. 
-    * To destroy the resources you've previously created, use the following:
+    * To destroy the resources you've previously created, use the following command:
       ```shell
       $ terraform destroy -var-file="params.tfvars.json"
       ```
 
 ## Resource creation and recycling
-When the terraform script is executed, terraform compiles your parameters to know exactly what it will create and in which order. 
+When the terraform script is executed, terraform compiles your specification to know exactly what it will create and in which order. 
 
-You may have noticed that the business group owner_id field makes a reference to ```data.anypoint_bg.root_org.owner_id```. It's referencing 
+You may have noticed that the business group [owner_id](resources.tf) field makes a reference to ```data.anypoint_bg.root_org.owner_id```. It's referencing 
 a data source. Check [data.tf](data.tf) to see that we are using the root_org variable (provided in the [params.tfvars.json](params.tfvars.json) or [variables.tf](variables.tf)) to load the root organization data and use it in our resources.
 
 When Terraform applies changes, the `tfstate` file is updated to save the latest resources state.
 
 When Terraform is executed for an update, it will compare against its latest state to refresh and recycle all resources. 
 
-> **N.B:** If the resource has been changed outside terraform (using anypoint UI, for example) terraform will not include those changes, and they will be overwritten.
+> **N.B:** If the resource has been changed outside terraform (using Anypoint Platform UI, for example) Terraform will not include those changes, and they will be overwritten.
 
 To learn more about those Terraform concepts, check [resources](https://developer.hashicorp.com/terraform/language/resources/syntax) and [data sources](https://developer.hashicorp.com/terraform/language/data-sources) documentation. 
 
 
 ## Terraform parameters file
-Terraform uses the parameters file to contextualize its execution. Following is the list of parameters
+Terraform uses the parameters file to contextualize its execution. Following is the list of parameters required for this demo
 ```json
 {
   "username": "xxxxxxxx",                             // anypoint username 
