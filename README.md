@@ -3,7 +3,7 @@
 ## Introduction
 This demo presents the base Terraform project structure to create Anypoint Platform resources.
 
-It creates one business group and add three environments to it. You can check [resources.tf](resources.tf) file for the details.
+It creates one business group and adds three environments to it. You can check [resources.tf](resources.tf) file for the details.
 
 
 ## How to use this demo ? 
@@ -17,33 +17,33 @@ Copy the demo folder to your workspace and perform the following action:
       ```shell
       $ terraform init  
       ```
-    * To apply changes, and create the resources in the platform use the following commands: 
+    * To apply the changes and create the resources in the platform, use the following commands: 
       ```shell
       $ terraform apply -var-file="params.tfvars.json"
       ```
-      Terraform will show you all the actions that it is going to perform and will ask for you validation. 
+      Terraform will show you all the actions it will perform and ask for your validation. 
     * To destroy the resources you've previously created, use the following:
       ```shell
       $ terraform destroy -var-file="params.tfvars.json"
       ```
 
 ## Resource creation and recycling
-When the terraform script is executed, terraform compiles your parameters to know exactly what it is going to create and in which order. 
+When the terraform script is executed, terraform compiles your parameters to know exactly what it will create and in which order. 
 
-You might have noticed that the business group owner_id field makes a reference to ```data.anypoint_bg.root_org.owner_id```. It's referencing 
+You may have noticed that the business group owner_id field makes a reference to ```data.anypoint_bg.root_org.owner_id```. It's referencing 
 a data source. Check [data.tf](data.tf) to see that we are using the root_org variable (provided in the [params.tfvars.json](params.tfvars.json) or [variables.tf](variables.tf)) to load the root organization data and use it in our resources.
 
 When Terraform applies changes, the `tfstate` file is updated to save the latest resources state.
 
-When Terraform is executed for update, it will compare against its latest state to refresh and recycle all resources. 
+When Terraform is executed for an update, it will compare against its latest state to refresh and recycle all resources. 
 
-> **N.B:** If the resource have been changed outside terraform (using anypoint UI for example) terraform will not include those changes, and they will be overwriten.
+> **N.B:** If the resource has been changed outside terraform (using anypoint UI, for example) terraform will not include those changes, and they will be overwritten.
 
 To learn more about those Terraform concepts, check [resources](https://developer.hashicorp.com/terraform/language/resources/syntax) and [data sources](https://developer.hashicorp.com/terraform/language/data-sources) documentation. 
 
 
 ## Terraform parameters file
-The parameters file is used to contextualize terraform's execution. Following is the list of parameters
+Terraform uses the parameters file to contextualize its execution. Following is the list of parameters
 ```json
 {
   "username": "xxxxxxxx",                             // anypoint username 
@@ -57,4 +57,4 @@ The anypoint user should have admin privileges.
 
 ## Disclaimer
 **This is an [UNLICENSED software, please review the considerations](LICENSE).** 
-This is an open source project, it does not form part of the official MuleSoft product stack, and is therefore not included in MuleSoft support SLAs. Issues should be directed to the community, who will try to assist on a best endeavours basis. This application is distributed **as is**.
+This is an open-source project; it does not form part of the official MuleSoft product stack and is therefore not included in MuleSoft support SLAs. Issues should be directed to the community, who will try to assist on a best endeavors basis. This application is distributed **as is**.
